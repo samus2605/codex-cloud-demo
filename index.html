@@ -3,29 +3,105 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Codex Cloud Demo</title>
+  <title>计数器小工具</title>
   <style>
-    body {
+    :root {
       font-family: system-ui, sans-serif;
-      margin: 40px;
-      background: #f6f8fa;
-      color: #222;
     }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #f5f7fb;
+      color: #222;
+      padding: 16px;
+      box-sizing: border-box;
+    }
+
+    .counter-card {
+      width: min(360px, 100%);
+      background: #fff;
+      border-radius: 14px;
+      padding: 20px;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+      text-align: center;
+    }
+
+    h1 {
+      margin: 0 0 12px;
+      font-size: 1.25rem;
+    }
+
+    .count-value {
+      font-size: 3rem;
+      font-weight: 700;
+      margin: 8px 0 20px;
+      line-height: 1;
+    }
+
+    .button-group {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 10px;
+    }
+
     button {
-      padding: 10px 16px;
+      width: 100%;
+      padding: 12px;
+      border: none;
+      border-radius: 10px;
+      font-size: 1rem;
+      font-weight: 600;
       cursor: pointer;
+      background: #2f6feb;
+      color: #fff;
+    }
+
+    button:active {
+      transform: scale(0.99);
+    }
+
+    .reset {
+      background: #6e7781;
     }
   </style>
 </head>
 <body>
-  <h1>Codex Cloud Demo</h1>
-  <p id="message">这是第一个版本。</p>
-  <button onclick="changeText()">点我</button>
+  <main class="counter-card">
+    <h1>计数器小工具</h1>
+    <div id="count" class="count-value">0</div>
+    <div class="button-group">
+      <button id="plusBtn" type="button">+1</button>
+      <button id="minusBtn" type="button">-1</button>
+      <button id="resetBtn" class="reset" type="button">重置</button>
+    </div>
+  </main>
 
   <script>
-    function changeText() {
-      document.getElementById("message").textContent = "按钮已点击。";
+    let count = 0;
+    const countEl = document.getElementById("count");
+
+    function render() {
+      countEl.textContent = count;
     }
+
+    document.getElementById("plusBtn").addEventListener("click", function () {
+      count += 1;
+      render();
+    });
+
+    document.getElementById("minusBtn").addEventListener("click", function () {
+      count -= 1;
+      render();
+    });
+
+    document.getElementById("resetBtn").addEventListener("click", function () {
+      count = 0;
+      render();
+    });
   </script>
 </body>
 </html>
